@@ -12,7 +12,21 @@ int FP = 0;   // False Positive
 int FN = 0;   // False Negative
         for (int i = 0; i < emails.size(); i++) {
         Email currentEmail = emails.get(i);
+        FeatureExtractor extractor = new FeatureExtractor();
         currentEmail.displayEmail();
+        System.out.println("===== FEATURES =====");
+
+System.out.println("Has URL        : " + extractor.hasURL(currentEmail));
+
+System.out.println("Free Email     : " + extractor.isFreeEmail(currentEmail));
+
+System.out.println("Subject Length : " + extractor.subjectLength(currentEmail));
+
+System.out.println("Body Length    : " + extractor.bodyLength(currentEmail));
+
+System.out.println("Keyword Count  : " + extractor.keywordCount(currentEmail));
+
+System.out.println("====================");
         int score = detector.calculateRisk(currentEmail);
         String prediction;
 
