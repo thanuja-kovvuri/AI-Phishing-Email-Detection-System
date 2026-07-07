@@ -27,11 +27,12 @@ public class EmailCSVReader{
                 }
 
                 Email email = new Email(
-                        parts[0], // sender
-                        parts[3], // subject
-                        parts[4], // body
-                        parts[6]  // urls
-                );
+        parts[0],
+        parts[3],
+        parts[4],
+        parts[6],
+        parts[5]
+);
 
                 emails.add(email);
             }
