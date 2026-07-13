@@ -3,8 +3,13 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
+        System.out.println("******** NEW MAIN RUNNING ********");
          EmailCSVReader reader = new EmailCSVReader();
-         ArrayList<Email> emails = reader.readCSV("phishingemaildetector/src/main/resources/emails.csv");
+         ArrayList<Email> emails = reader.readCSV("src/main/resources/emails.csv");
+         NaiveBayesClassifier classifier = new NaiveBayesClassifier();
+classifier.train(emails);
+         DatasetGenerator generator = new DatasetGenerator();
+generator.generate(emails);
         PhishingDetector detector = new PhishingDetector();
         int TP = 0;   // True Positive
 int TN = 0;   // True Negative
@@ -13,12 +18,27 @@ int FN = 0;   // False Negative
         for (int i = 0; i < emails.size(); i++) {
         Email currentEmail = emails.get(i);
         FeatureExtractor extractor = new FeatureExtractor();
+        System.out.println("===== RISK ANALYSIS =====");
+
+RiskAnalyzer risk = new RiskAnalyzer();
+
+int riskScore = risk.calculateRisk(currentEmail);
+
+String riskLevel = risk.getRiskLevel(riskScore);
+
+System.out.println("Risk Score : " + riskScore);
+System.out.println("Risk Level : " + riskLevel);
         currentEmail.displayEmail();
         System.out.println("===== FEATURES =====");
+        System.out.println("Risk Score    : " + riskScore);
 
+System.out.println("Risk Level    : " + riskLevel);
 System.out.println("Has URL        : " + extractor.hasURL(currentEmail));
 
+System.out.println("URL Count      : " + extractor.urlCount(currentEmail));
+
 System.out.println("Free Email     : " + extractor.isFreeEmail(currentEmail));
+
 
 System.out.println("Subject Length : " + extractor.subjectLength(currentEmail));
 
@@ -27,14 +47,7 @@ System.out.println("Body Length    : " + extractor.bodyLength(currentEmail));
 System.out.println("Keyword Count  : " + extractor.keywordCount(currentEmail));
 
 System.out.println("====================");
-        int score = detector.calculateRisk(currentEmail);
-        String prediction;
-
-if (score >= 50) {
-    prediction = "1";
-} else {
-    prediction = "0";
-}
+        String prediction = classifier.predict(currentEmail);
         System.out.println("Prediction  : " + prediction);
         System.out.println("Actual Label: " + currentEmail.label);
        if (prediction.equals("1") && currentEmail.label.equals("1")) {

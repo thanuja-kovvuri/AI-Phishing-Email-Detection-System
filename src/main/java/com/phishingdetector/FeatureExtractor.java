@@ -12,6 +12,26 @@ public class FeatureExtractor {
         }
         return 0;
     }
+    public int urlCount(Email email) {
+
+    String body = email.body.toLowerCase();
+
+    int count = 0;
+
+    String[] words = body.split("\\s+");
+
+    for (String word : words) {
+
+        if (word.startsWith("http://")
+                || word.startsWith("https://")
+                || word.startsWith("www.")) {
+
+            count++;
+        }
+    }
+
+    return count;
+}
 
     public int isFreeEmail(Email email) {
         String sender = email.sender.toLowerCase();
