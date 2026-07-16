@@ -160,6 +160,22 @@ DetectorGUI.java
 
 ## GUI Preview
 
+### Home Screen
+
+![Home Screen](screenshots/home.png)
+
+---
+
+### Phishing Email Detection
+
+![Phishing Detection](screenshots/phishing.png)
+
+---
+
+### Legitimate Email Detection
+
+![Legitimate Detection](screenshots/legitimate.png)
+
 The application allows the user to:
 
 - Enter Sender
