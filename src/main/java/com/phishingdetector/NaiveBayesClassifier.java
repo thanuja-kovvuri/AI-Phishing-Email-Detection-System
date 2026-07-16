@@ -39,17 +39,16 @@ vocabularySize = 0;
         if (email.label.equals("1")) {
 
             phishingCount++;
-
             for (String word : words) {
 
-                if (word.isEmpty()) continue;
+    if(word.isEmpty() || StopWords.words.contains(word))
+        continue;
 
-                phishingWords.put(word,
+    phishingWords.put(word,
         phishingWords.getOrDefault(word,0)+1);
 
-totalPhishingWords++;
-
-            }
+    totalPhishingWords++;
+}
 
         }
 
@@ -132,6 +131,8 @@ public String predict(Email email) {
 
         legitimateScore += Math.log(legitimateProbability);
     }
+    System.out.println("Phishing Score  : " + phishingScore);
+System.out.println("Legitimate Score: " + legitimateScore);
 
     if(phishingScore > legitimateScore)
         return "1";

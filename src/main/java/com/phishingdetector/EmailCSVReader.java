@@ -25,7 +25,7 @@ public class EmailCSVReader{
                     System.out.println("Skipping invalid row...");
                     continue;
                 }
-
+System.out.println("Label = " + parts[5] + " | Subject = " + parts[3]);
                 Email email = new Email(
         parts[0],
         parts[3],
