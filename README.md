@@ -160,12 +160,6 @@ DetectorGUI.java
 
 ## GUI Preview
 
-### Home Screen
-
-![Home Screen](screenshots/home.png)
-
----
-
 ### Phishing Email Detection
 
 ![Phishing Detection](screenshots/phishing.png)
